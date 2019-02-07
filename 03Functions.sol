@@ -3,7 +3,7 @@ pragma solidity ^0.5.1;
 contract MyContract {
     uint256 public peopleCount;
     mapping(uint => Person) public people;
-    address owner;
+    uint256 openingTime= 1549557962;
 
     struct Person {
         uint id;
@@ -11,14 +11,8 @@ contract MyContract {
         string _lastName;
     }
 
-    constructor() public{
-        owner= msg.sender;
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        // if true then continues
-        // if false throws an error
+    modifier onlyWileOpen() {
+        require(block.timestamp >= openingTime);
         _;
     }
 

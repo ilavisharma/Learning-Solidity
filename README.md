@@ -117,7 +117,8 @@ function addPerson(string memory _firstName, string memory _lastName) public {
     }
 ```
 
-**Function Modifiers**
+**Function Modifiers**<br>
+checking ownership
 
 ```
 modifier onlyOwner() {
@@ -128,6 +129,40 @@ modifier onlyOwner() {
     }
 
     function addPerson(string memory _firstName, string memory _lastName) public onlyOwner {
+        incrementCount();
+        people[peopleCount]= Person(peopleCount, _firstName, _lastName);
+    }
+```
+
+##### Function Modifiers
+
+Checking Ownership:
+
+```
+modifier onlyOwner() {
+        require(msg.sender == owner);
+        // if true then continues
+        // if false throws an error
+        _;
+    }
+
+    function addPerson(string memory _firstName, string memory _lastName) public onlyOwner {
+        incrementCount();
+        people[peopleCount]= Person(peopleCount, _firstName, _lastName);
+    }
+```
+
+Time Validation<br>
+_time is managed in epoch format_
+
+```
+uint256 openingTime= 1549557962;
+modifier onlyWileOpen() {
+        require(block.timestamp >= openingTime);
+        _;
+    }
+
+    function addPerson(string memory _firstName, string memory _lastName) public onlyWileOpen {
         incrementCount();
         people[peopleCount]= Person(peopleCount, _firstName, _lastName);
     }
