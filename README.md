@@ -36,6 +36,7 @@ string public stringValue= "myString";
     int public myInt= -1;
     uint public myUint= 1;
     uint8 public myUint8= 8;
+    address owner;
 ```
 
 Another data type available is enum (enumerated list):
@@ -113,5 +114,21 @@ function addPerson(string memory _firstName, string memory _lastName) public {
     function incrementCount() internal {
       // now this function can not be accessed outside
         peopleCount+=1;
+    }
+```
+
+**Function Modifiers**
+
+```
+modifier onlyOwner() {
+        require(msg.sender == owner);
+        // if true then continues
+        // if false throws an error
+        _;
+    }
+
+    function addPerson(string memory _firstName, string memory _lastName) public onlyOwner {
+        incrementCount();
+        people[peopleCount]= Person(peopleCount, _firstName, _lastName);
     }
 ```
