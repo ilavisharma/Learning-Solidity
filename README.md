@@ -79,3 +79,23 @@ contract MyContract {
     }
 }
 ```
+
+**mapping** In Solidity, a mapping is referred to a hash table, which consists of key types and value type pairs. We define a mapping like any other variable type:
+
+```
+contract MyContract {
+    uint256 public peopleCount;
+    mapping(uint => Person) public people;
+
+    struct Person {
+        uint id;
+        string _firstName;
+        string _lastName;
+    }
+
+    function addPerson(string memory _firstName, string memory _lastName) public {
+        peopleCount+=1;
+        people[peopleCount]= Person(peopleCount, _firstName, _lastName);
+    }
+}
+```
