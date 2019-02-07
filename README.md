@@ -99,3 +99,19 @@ contract MyContract {
     }
 }
 ```
+
+### Functions
+
+**internal** makes a function internal as the name suggests so it cannot be executed from the outside.
+
+```
+function addPerson(string memory _firstName, string memory _lastName) public {
+        incrementCount();
+        people[peopleCount]= Person(peopleCount, _firstName, _lastName);
+    }
+
+    function incrementCount() internal {
+      // now this function can not be accessed outside
+        peopleCount+=1;
+    }
+```
