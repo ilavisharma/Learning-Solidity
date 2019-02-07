@@ -1,18 +1,18 @@
 pragma solidity ^0.5.1;
 
 contract MyContract {
-    enum State {Waiting, Ready, Active}
-    State public state;
+    Person[] public people;
+    // we cannot find out the length directly
+    // so we can use a variable that keeps track of it
+    uint256 public peopleCount;
 
-    constructor() public {
-      state= State.Active;
+    struct Person {
+        string _firstName;
+        string _lastName;
     }
 
-    function activate() public {
-      state= State.Active;
-    }
-
-    function isActive() public view returns(bool) {
-      return state==State.Active;
+    function addPerson(string memory _firstName, string memory _lastName) public {
+        people.push(Person(_firstName, _lastName));
+        peopleCount++;
     }
 }
